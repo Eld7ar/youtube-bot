@@ -16,6 +16,7 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE):
         'format': 'best[ext=mp4]/best',
         'outtmpl': 'video_%(id)s.%(ext)s',
         'noplaylist': True,
+        'cookiefile': 'cookies.txt',  # السطر ده هو السر
     }
     
     try:
@@ -28,7 +29,7 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
         os.remove(filename)
     except Exception as e:
-        await update.message.reply_text(f"❌ Error: Video is too large or link is broken.")
+        await update.message.reply_text(f"❌ Error: Video is too large or YouTube is blocking the server.")
 
 def main():
     app = Application.builder().token(TOKEN).build()
